@@ -13,7 +13,7 @@ app = FastAPI(title="Python Dojo API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # tighten this to your frontend's URL once deployed
+    allow_origins=["https://learn-python-sand-chi.vercel.app"],  # tighten this to your frontend's URL once deployed
     allow_methods=["*"],
     allow_headers=["*"],
 )
