@@ -33,6 +33,10 @@ export default function LevelView({ level, onProgressChange }) {
     }
   }
 
+  function goToPreviousLesson() {
+    setLessonIndex((idx) => Math.max(idx - 1, 0))
+  }
+
   async function loadProject() {
     setError(null)
     try {
@@ -67,9 +71,14 @@ export default function LevelView({ level, onProgressChange }) {
         </div>
         <h2 className="title">{currentLesson.name}</h2>
         <Markdown text={currentLesson.lesson_md} />
-        <button className="btn" onClick={markDoneAndAdvance}>
-          {lessonIndex + 1 === lessons.length ? "Done — see the level project" : 'Got it — next lesson'}
-        </button>
+        <div className="btn-row">
+          <button className="btn ghost" onClick={goToPreviousLesson} disabled={lessonIndex === 0}>
+            Back
+          </button>
+          <button className="btn" onClick={markDoneAndAdvance}>
+            {lessonIndex + 1 === lessons.length ? "Done — see the level project" : 'Got it — next lesson'}
+          </button>
+        </div>
         {error && <p className="error">{error}</p>}
       </div>
     )
