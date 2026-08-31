@@ -1,0 +1,153 @@
+.app-shell{
+  display:flex;
+  min-height:100vh;
+}
+
+.loading, .error{
+  padding:48px;
+  color:var(--text-muted);
+}
+.error{ color:var(--danger); }
+
+/* ---- rail ---- */
+.rail{
+  width:240px;
+  flex-shrink:0;
+  background:var(--panel);
+  border-right:1px solid var(--line);
+  padding:28px 0;
+  display:flex;
+  flex-direction:column;
+}
+.rail-head{
+  padding:0 22px 22px 22px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:8px;
+}
+.rail-head .eyebrow{ color:var(--brass); font-size:12px; letter-spacing:0.06em; }
+.rail-head h1{ font-size:22px; margin:6px 0 0 0; }
+
+.level{
+  all:unset;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  padding:16px 22px 16px 46px;
+  cursor:pointer;
+  border-left:1px solid var(--line);
+  margin-left:22px;
+  width:170px;
+}
+.level:last-child{ border-left:1px solid transparent; }
+.level:hover:not(.locked){ background:var(--panel-hi); }
+.level.locked{ cursor:not-allowed; opacity:0.55; }
+
+.level .dot{
+  position:absolute; left:-6px; top:19px;
+  width:11px; height:11px; border-radius:50%;
+  background:var(--panel); border:2px solid var(--line);
+}
+.level.done .dot{ background:var(--sage); border-color:var(--sage); }
+.level.active .dot{
+  background:var(--brass); border-color:var(--brass);
+  box-shadow:0 0 0 4px rgba(201,138,62,0.18);
+}
+
+.level .num{ font-size:11px; color:var(--text-muted); }
+.level.active .num{ color:var(--brass); }
+.level .name{ font-size:14px; margin-top:2px; color:var(--text-muted); text-align:left; }
+.level.active .name{ color:var(--text); font-weight:500; }
+.level.done .name{ color:var(--text); }
+.level .score{ font-size:11px; color:var(--sage); margin-top:3px; }
+
+/* ---- main ---- */
+.main{
+  flex:1;
+  padding:48px 64px;
+  max-width:780px;
+}
+.eyebrow{ color:var(--brass); font-size:12px; }
+.title{ font-size:34px; margin:8px 0 22px 0; line-height:1.15; }
+.lede{ color:var(--text-muted); font-size:15.5px; line-height:1.65; max-width:60ch; }
+
+.markdown p{ font-size:15px; line-height:1.7; color:var(--text); }
+.markdown pre{
+  background:var(--panel-hi);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:16px 18px;
+  overflow-x:auto;
+  font-size:13.5px;
+  line-height:1.6;
+  margin:14px 0;
+}
+.markdown code{
+  background:var(--panel-hi);
+  padding:1px 6px;
+  border-radius:3px;
+  font-size:13px;
+  color:var(--brass);
+}
+.markdown pre code{ background:none; padding:0; color:var(--text); }
+.markdown ul{ padding-left:18px; line-height:1.8; font-size:15px; }
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:26px 28px;
+  margin-top:26px;
+}
+.card h3{ font-size:19px; margin:0 0 10px 0; }
+
+.btn{
+  display:inline-block;
+  margin-top:22px;
+  background:var(--brass);
+  color:#20180C;
+  font-weight:600;
+  font-size:14px;
+  padding:11px 22px;
+  border-radius:4px;
+  border:none;
+}
+.btn:disabled{ opacity:0.6; cursor:not-allowed; }
+.btn.ghost{
+  background:transparent;
+  border:1px solid var(--line);
+  color:var(--text);
+  margin-left:10px;
+}
+
+.code-input{
+  width:100%;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:6px;
+  color:var(--text);
+  padding:16px;
+  font-size:13.5px;
+  line-height:1.6;
+  margin-top:16px;
+  resize:vertical;
+}
+
+.feedback-score{ display:flex; align-items:baseline; gap:10px; margin-top:4px; }
+.feedback-score .num{ font-size:44px; color:var(--sage); font-weight:600; }
+.feedback-score .of{ color:var(--text-muted); font-size:15px; }
+
+.tags{ margin-top:12px; }
+.tag{
+  display:inline-block;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  padding:3px 9px;
+  border-radius:3px;
+  margin:0 6px 6px 0;
+}
+.tag.good{ background:rgba(107,143,113,0.15); color:var(--sage); border:1px solid rgba(107,143,113,0.35); }
+.tag.fix{ background:rgba(201,138,62,0.12); color:var(--brass); border:1px solid rgba(201,138,62,0.35); }
+
+.next-step{ color:var(--text-muted); font-size:13px; margin-top:14px; }
+.passed-banner{ color:var(--sage); font-weight:500; margin-top:10px; }
+.retry-banner{ color:var(--brass); font-weight:500; margin-top:10px; }
