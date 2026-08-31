@@ -13,7 +13,7 @@ app = FastAPI(title="Python Dojo API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://learn-python-sand-chi.vercel.app"],  # tighten this to your frontend's URL once deployed
+    allow_origins=["*"],  # tighten this to your frontend's URL once deployed
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -74,15 +74,22 @@ async def submit(payload: SubmitPayload):
     if not level or not project:
         raise HTTPException(404, "Level or project not found")
 
-    result = await grade_submission(
-        topic_name=level[1],
-        brief_md=project["brief_md"],
-        rubric_md=project["rubric_md"],
-        code=payload.code,
-    )
+    try:
+        result = await grade_submission(
+            topic_name=level[1],
+            brief_md=project["brief_md"],
+            rubric_md=project["rubric_md"],
+            code=payload.code,
+        )
+    except Exception as e:
+        raise HTTPException(500, f"Grading failed: {e}")
 
     next_id = _next_level_id(payload.level_id)
-    passed = db.save_submission_and_progress(payload.level_id, payload.code, result, next_id)
+
+    try:
+        passed = db.save_submission_and_progress(payload.level_id, payload.code, result, next_id)
+    except Exception as e:
+        raise HTTPException(500, f"Saving progress failed: {e}")
 
     return {**result, "passed": passed, "next_level_id": next_id if passed else None}
 
